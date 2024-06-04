@@ -10,7 +10,7 @@ def expand_ipv6(address):
 
     return ':'.join(expanded_parts)
 
-def normalize_ipv6(address):
+def norm_ipv6(address):
     if '::' in address:
         left, right = address.split('::')
         left_parts = left.split(':') if left else []
@@ -23,4 +23,4 @@ def normalize_ipv6(address):
     return expand_ipv6(expanded_address)
 
 address = input().strip()
-print(normalize_ipv6(address))
+print(norm_ipv6(address))
