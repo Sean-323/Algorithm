@@ -1,21 +1,27 @@
-import sys as s
-N, M = map(int, s.stdin.readline().split())
-arr = list(map(int, s.stdin.readline().split()))
+import sys
 
-left, right = 0, max(arr)
-result = 0
+def main():
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    M = int(data[1])
+    arr = list(map(int, data[2:2+N]))
 
-while left <= right:
-    mid = (left + right) // 2
-    total = 0
-    for h in arr:
-        if h > mid:
-            total += h - mid
+    left, right = 0, max(arr)
+    result = 0
 
-    if total >= M:
-        result = mid
-        left = mid + 1
-    else:
-        right = mid - 1
+    while left <= right:
+        mid = (left + right) // 2
+        total = sum(h - mid for h in arr if h > mid)
 
-print(result)
+        if total >= M:
+            result = mid
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    print(result)
+
+if __name__ == "__main__":
+    main()
