@@ -1,16 +1,14 @@
-import sys
 import math
+import sys as s
 
-def max_jumps(n):
-    if n < 1:
-        return 0
-    k = int((-1 + math.sqrt(1 + 8 * n)) / 2)
-    return k
+def max_k(N):
+    return int((-1 + math.sqrt(1 + (8 * N))) // 2)
 
-n = int(sys.stdin.readline().strip())
-arr = []
-for _ in range(n):
-    arr.append(int(sys.stdin.readline().strip()))
+num = int(s.stdin.readline().strip())
+result = []
 
-for i in arr:
-    print(max_jumps(i))
+for i in range(num):
+    result.append(int(s.stdin.readline().strip()))
+
+for i in result:
+    print(max_k(i))
