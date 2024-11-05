@@ -1,14 +1,12 @@
-import sys
-import itertools
+import sys, itertools
 
-n, s = map(int, sys.stdin.readline().split())
-arr1 = list(map(int, sys.stdin.readline().split()))
-
+N, S = map(int, sys.stdin.readline().split())
+arr = list(map(int, sys.stdin.readline().split()))
 result = 0
 
-for i in range(1, n + 1):
-    for combination in itertools.combinations(arr1, i):
-        if sum(combination) == s:
+for i in range(1, N + 1):
+    for comb in itertools.combinations(arr, i):
+        if sum(comb) == S:
             result += 1
 
 print(result)
