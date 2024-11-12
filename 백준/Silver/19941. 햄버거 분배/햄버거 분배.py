@@ -11,7 +11,7 @@ for idx, seat in enumerate(seats):
     if seat == 'H':
         hamburger_positions.append(idx)
 
-# 햄버거 위치를 리스트로 관리 (정렬되어 있음)
+# 햄버거 위치는 이미 순서대로 저장됨
 # 할당된 햄버거의 위치를 관리하기 위해 set 사용
 assigned_hamburgers = set()
 
