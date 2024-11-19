@@ -1,13 +1,11 @@
 import sys
 from collections import defaultdict
-
-input = sys.stdin.readline
 sys.setrecursionlimit(100000)
+input = sys.stdin.readline
 
 def dfs(node, parent):
     global is_cycle
     visited[node] = True
-
     for neighbor in graph[node]:
         if not visited[neighbor]:
             dfs(neighbor, node)
@@ -42,5 +40,5 @@ while True:
         print(f"Case {case}: There is one tree.")
     else:
         print(f"Case {case}: A forest of {tree_count} trees.")
-    
+
     case += 1
