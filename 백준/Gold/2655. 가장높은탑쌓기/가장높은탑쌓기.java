@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -21,7 +22,7 @@ public class Main {
     static int[] dy;
     static int[] prev;
 
-    private static void solution(ArrayList<Brick> arr) {
+    private static String solution(ArrayList<Brick> arr) {
         Collections.sort(arr);
         int n = arr.size();
         dy = new int[n];
@@ -47,22 +48,27 @@ public class Main {
             maxIdx = prev[maxIdx];
         }
 
-        System.out.println(answer.size());
-        for (int i = answer.size() - 1; i >= 0; i--) System.out.println(answer.get(i));
+        StringBuilder sb = new StringBuilder();
+        sb.append(answer.size()).append("\n");
+        for (int i = answer.size() - 1; i >= 0; i--) sb.append(answer.get(i)).append("\n");
+
+        return sb.toString();
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
 
         ArrayList<Brick> arr = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            int s = sc.nextInt();
-            int h = sc.nextInt();
-            int w = sc.nextInt();
-            arr.add(new Brick(i + 1, s, h, w)); 
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int s = Integer.parseInt(st.nextToken());
+            int h = Integer.parseInt(st.nextToken());
+            int w = Integer.parseInt(st.nextToken());
+            arr.add(new Brick(i + 1, s, h, w));
         }
 
-        solution(arr);
+        System.out.print(solution(arr));
+        br.close();
     }
 }
