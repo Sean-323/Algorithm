@@ -19,14 +19,11 @@ public class Main {
         }
     }
 
-    static int[] dy;
-    static int[] prev;
-
     private static String solution(ArrayList<Brick> arr) {
         Collections.sort(arr);
         int n = arr.size();
-        dy = new int[n];
-        prev = new int[n];
+        int[] dy = new int[n];
+        int[] prev = new int[n];
 
         int maxIdx = 0;
 
@@ -42,15 +39,18 @@ public class Main {
             if (dy[i] > dy[maxIdx]) maxIdx = i;
         }
 
-        LinkedList<Integer> answer = new LinkedList<>();
+        ArrayList<Integer> answer = new ArrayList<>();
         while (maxIdx != -1) {
-            answer.addFirst(arr.get(maxIdx).index);
+            answer.add(arr.get(maxIdx).index);
             maxIdx = prev[maxIdx];
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(answer.size()).append("\n");
-        for (int i = answer.size() - 1; i >= 0; i--) sb.append(answer.get(i)).append("\n");
+        sb.append(answer.size()).append('\n');
+        
+        for (int i = 0; i < answer.size(); i++) {
+            sb.append(answer.get(i)).append('\n');
+        }
 
         return sb.toString();
     }
@@ -60,8 +60,11 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
 
         ArrayList<Brick> arr = new ArrayList<>();
+        arr.ensureCapacity(n);
+        
+        StringTokenizer st;
         for (int i = 0; i < n; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
+            st = new StringTokenizer(br.readLine());
             int s = Integer.parseInt(st.nextToken());
             int h = Integer.parseInt(st.nextToken());
             int w = Integer.parseInt(st.nextToken());
