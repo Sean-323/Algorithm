@@ -9,22 +9,31 @@ class Solution {
         }
 
         for (int[] e : edge) {
-            int a = e[0];
-            int b = e[1];
-            graph[a].add(b);
-            graph[b].add(a); // 무향 그래프
+            graph[e[0]].add(e[1]);
+            graph[e[1]].add(e[0]); // 무향 그래프
         }
 
-        // 2. BFS 준비
+        // 2. BFS 탐색 - 최적화된 방식
         int[] dist = new int[n + 1];
         Arrays.fill(dist, -1); // 방문 안한 곳은 -1
+
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(1); // 시작은 1번 노드
         dist[1] = 0;
 
-        // 3. BFS 탐색
+        int maxDist = 0;
+        int count = 0;
+
+        // 3. BFS 탐색하면서 최대 거리 계산
         while (!queue.isEmpty()) {
             int now = queue.poll();
+
+            if (dist[now] > maxDist) {
+                maxDist = dist[now];
+                count = 1;
+            } else if (dist[now] == maxDist) {
+                count++;
+            }
 
             for (int next : graph[now]) {
                 if (dist[next] == -1) {
@@ -34,17 +43,7 @@ class Solution {
             }
         }
 
-        // 4. 가장 먼 거리 구하고, 그 거리의 노드 개수 세기
-        int max = 0;
-        for (int i = 1; i <= n; i++) {
-            max = Math.max(max, dist[i]);
-        }
-
-        int count = 0;
-        for (int i = 1; i <= n; i++) {
-            if (dist[i] == max) count++;
-        }
-
-        return count;
+        // 마지막 레벨의 노드들만 카운트 반환
+        return count - (maxDist == 0 ? 1 : 0); // 시작 노드 제외
     }
 }
