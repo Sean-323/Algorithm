@@ -3,19 +3,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        // 입력
+        StringBuilder sb = new StringBuilder();
+
         String A = sc.nextLine().trim();
         char[] arr = A.toCharArray();
-        String result = "";
 
-        // 로직
         for (char c : arr) {
-            if (c >= 'A' && c <= 'Z') result += (char) (c - 'A' + 'a');
-                
-            else result += (char) (c - 'a' + 'A');
+            if (c >= 'A' && c <= 'Z') sb.append((char) (c - 'A' + 'a'));
+            else sb.append((char) (c - 'a' + 'A'));
         }
 
-        // 출력
-        System.out.println(result);
+        System.out.println(sb);
     }
 }
