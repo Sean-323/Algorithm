@@ -9,8 +9,8 @@ public class Main {
         String A = br.readLine().trim();
         String B = br.readLine().trim();
 
-        int[] countA = new int[26];
-        int[] countB = new int[26];
+        int[] countA;
+        int[] countB;
         int result = 0;
 
         // 로직
@@ -18,8 +18,7 @@ public class Main {
         countB = getAlphabetCount(B);
 
         for (int i = 0; i < 26; i++) {
-            if (countA[i] > countB[i]) result+= countA[i] - countB[i];
-            else if (countB[i] > countA[i]) result+= countB[i] - countA[i];
+            result += Math.abs(countA[i] - countB[i]);
         }
 
         // 출력
