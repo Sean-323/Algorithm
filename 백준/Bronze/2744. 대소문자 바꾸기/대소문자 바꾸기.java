@@ -1,18 +1,15 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = br.readLine();
         StringBuilder sb = new StringBuilder();
 
-        String A = sc.nextLine().trim();
-        char[] arr = A.toCharArray();
-
-        for (char c : arr) {
-            if (c >= 'A' && c <= 'Z') sb.append((char) (c - 'A' + 'a'));
-            else sb.append((char) (c - 'a' + 'A'));
+        for (char c : s.toCharArray()) {
+            if (Character.isUpperCase(c)) sb.append(Character.toLowerCase(c));
+            else sb.append(Character.toUpperCase(c));
         }
-
         System.out.println(sb);
     }
 }
