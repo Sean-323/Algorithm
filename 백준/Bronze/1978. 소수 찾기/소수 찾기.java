@@ -1,39 +1,30 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int N = Integer.parseInt(br.readLine().trim());
-        int[] arr = new int[N];
-
-        StringTokenizer st = new StringTokenizer(br.readLine().trim());
-        for (int i = 0; i < N; i++) arr[i] = Integer.parseInt(st.nextToken());
-
-        int result = isPrime(arr);
-        System.out.println(result);
+    static boolean isPrime(int x) {
+        if (x < 2) return false;
+        if (x == 2) return true;
+        if (x % 2 == 0) return false;
+        for (int i = 3; i * i <= x; i += 2) {
+            if (x % i == 0) return false;
+        }
+        return true;
     }
 
-    private static int isPrime(int[] arr) {
-        int count = 0;
-        for (int num : arr) {
-            if (num < 2) continue; // 0과 1은 소수가 아님
-            boolean isPrime = true;
-            for (int i = 2; i <= Math.sqrt(num); i++) {
-                if (num % i == 0) {
-                    isPrime = false;
-                    break;
-                }
-            }
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
 
-            if (isPrime) count++;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int count = 0;
+
+        for (int i = 0; i < n; i++) {
+            int x = Integer.parseInt(st.nextToken());
+            if (isPrime(x)) count++;
         }
 
-        return count;
+        System.out.println(count);
     }
-
 }
