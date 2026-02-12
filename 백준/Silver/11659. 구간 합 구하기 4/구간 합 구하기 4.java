@@ -9,26 +9,20 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        // 입력
-        StringTokenizer st = new StringTokenizer(br.readLine().trim());
+        StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        int[] sumArr = new int[N + 1];
 
-        st = new StringTokenizer(br.readLine().trim());
+        int[] prefix = new int[N + 1];
+        st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= N; i++) prefix[i] = prefix[i - 1] + Integer.parseInt(st.nextToken());
 
-        for (int i = 1; i <= N; i++) sumArr[i] = sumArr[i - 1] + Integer.parseInt(st.nextToken());
-
-        // 로직
         for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(br.readLine().trim());
-            int A = Integer.parseInt(st.nextToken());
-            int B = Integer.parseInt(st.nextToken());
-            sb.append(sumArr[B] - sumArr[A - 1]).append("\n");
+            st = new StringTokenizer(br.readLine());
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            sb.append(prefix[y] - prefix[x - 1]).append("\n");
         }
-
-        // 출력
-        System.out.print(sb);
+        System.out.println(sb);
     }
-
 }
