@@ -4,36 +4,38 @@ import java.io.InputStreamReader;
 
 public class Main {
     static int N;
-    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        N = Integer.parseInt(br.readLine().trim());
+        // 입력
+        N = Integer.parseInt(br.readLine());
 
-        dfs(2, 1);
-        dfs(3, 1);
-        dfs(5, 1);
-        dfs(7, 1);
-        System.out.println(sb);
+        // 로직
+        DFS(2, 1);
+        DFS(3, 1);
+        DFS(5, 1);
+        DFS(7, 1);
     }
 
-    static void dfs(int num, int length) {
-        if (length == N) {
-            sb.append(num).append("\n");
+    private static void DFS (int number, int jarisu) {
+        if (jarisu == N) {
+            if (isPrime(number)) System.out.println(number);
             return;
         }
 
-        for (int i = 0; i <= 9; i++) {
-            int next = num * 10 + i;
-            if (isPrime(next)) dfs(next, length + 1);
+        for (int i = 1; i < 10; i++) {
+            if (i % 2 == 0) continue;
+
+            if (isPrime(number * 10 + i)) DFS(number * 10 + i, jarisu + 1);
         }
     }
 
-    static boolean isPrime(int num) {
-        if (num < 2) return false;
-        for (int i = 2; i <= Math.sqrt(num); i++) if (num % i == 0) return false;
+    private static boolean isPrime(int num) {
+        for (int i = 2; i <= num / 2; i++) {
+            if (num % i == 0) return false;
+        }
+
         return true;
     }
-
 }
